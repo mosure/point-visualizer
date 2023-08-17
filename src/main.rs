@@ -52,13 +52,6 @@ struct Points {
 #[derive(Resource)]
 struct PointsHandle(Handle<Points>);
 
-#[derive(Debug, Clone, Copy, Default, Eq, PartialEq, Hash, States)]
-enum AppState {
-    #[default]
-    Loading,
-    Level,
-}
-
 
 fn point_visualizer_app() {
     App::new()
@@ -76,7 +69,6 @@ fn point_visualizer_app() {
                 ..default()
             }
         ))
-        .add_state::<AppState>()
         .add_systems(Startup, setup)
         .add_systems(Update, draw_points)
         .insert_resource(Msaa::Off)
@@ -100,26 +92,21 @@ fn setup(
         },
         PanOrbitCamera {
             button_pan: MouseButton::Middle,
-            orbit_smoothness: 0.95,
             ..default()
         },
     ));
 }
 
 fn draw_points(
-    point_group: Res<PointsHandle>,
-    mut point_groups: ResMut<Assets<Points>>,
-    mut state: ResMut<NextState<AppState>>,
-    mut shapes: ShapeCommands
+    point_groups: ResMut<Assets<Points>>,
+    mut shapes: ShapePainter
 ) {
-    if let Some(point_group) = point_groups.remove(point_group.0.id()) {
-        for point in point_group.points {
-            shapes.set_translation(Vec3::new(point.location.x, point.location.y, point.location.z) * i as f32);
+    for point_group in point_groups.iter() {
+        for point in point_group.1.points.iter() {
+            shapes.set_translation(Vec3::new(point.location.x, point.location.y, point.location.z));
             shapes.color = render::color::Color::rgba(point.color.r, point.color.g, point.color.b, point.color.a);
             shapes.circle(point.size);
         }
-
-        state.set(AppState::Level);
     }
 }
 
