@@ -5,3 +5,7 @@ runner = "wasm-server-runner"
 
 [future-incompat-report]
 frequency = "always"
+
+
+[build]
+rustc-wrapper = "sccache"

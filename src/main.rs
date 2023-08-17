@@ -81,7 +81,7 @@ fn setup(
     asset_server: Res<AssetServer>,
 ) {
     commands.insert_resource(
-        PointsHandle(asset_server.load("test.points.json"))
+        PointsHandle(asset_server.load("tsne_p30_i1000.points.json"))
     );
 
     commands.spawn((
