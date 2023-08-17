@@ -1,0 +1,7 @@
+# alternatively, `export CARGO_TARGET_WASM32_UNKNOWN_UNKNOWN_RUNNER=wasm-server-runner`
+
+[target.wasm32-unknown-unknown]
+runner = "wasm-server-runner"
+
+[future-incompat-report]
+frequency = "always"
