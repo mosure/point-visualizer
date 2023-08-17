@@ -31,6 +31,9 @@ jobs:
           target/
         key: ${{ runner.os }}-cargo-build-stable-${{ hashFiles('**/Cargo.toml') }}
 
+    - name: clear cargo config
+      run: rm -rf ~/.cargo/config
+
     - name: build
       run: cargo build --timings
 

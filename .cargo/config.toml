@@ -7,5 +7,6 @@ runner = "wasm-server-runner"
 frequency = "always"
 
 
+# remove this if you don't want to use sccache
 [build]
 rustc-wrapper = "sccache"
