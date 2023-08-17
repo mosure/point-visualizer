@@ -33,6 +33,7 @@ jobs:
 
     - name: clear cargo config
       run: rm -rf .cargo
+      shell: bash
 
     - name: build
       run: cargo build --timings
