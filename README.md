@@ -1,5 +1,7 @@
 # point-visualizer
 
+![screengrab](docs/image.png)
+
 - `cargo run`
 
 ## WASM
